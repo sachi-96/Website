@@ -1,0 +1,16 @@
+---
+title: "Sachi Shiroma"
+image: "IMG_4648.jpg"
+links:
+  - label: LinkedIn
+    url: "https://www.linkedin.com/in/s-shiroma/"
+  - label: GitHub
+    url: "https://github.com/sachi-96"
+  - label: Email
+    url: "mailto:sachishiroma@ucsb.edu"
+output:
+  postcards::trestles
+site: distill::distill_website
+---
+ 
+"Insert Bio Here"
