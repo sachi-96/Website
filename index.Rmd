@@ -1,6 +1,6 @@
 ---
 title: "Sachi Shiroma"
-image: "IMG_4648.jpg"
+image: "IMG_4648.JPG"
 links:
   - label: LinkedIn
     url: "https://www.linkedin.com/in/s-shiroma/"
