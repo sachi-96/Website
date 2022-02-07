@@ -1,7 +1,22 @@
 ---
-title: "About this site"
+title: "About Sachi"
+image: "IMG_2248" 
 description: |
-  Some additional details about the website
+  Interests: 
+    Surfing, Nature, Social Justice Issues, Public Policy Advocacy, Environmental Jusitice, Animals 
+  
+  
+  Experience/Projects:
+    City of San Jose Data Collecting 
+    Volunteering for trash clean ups 
+
+  
+    
+      
+
+  
+  
+  
 ---
 
 ```{r setup, include=FALSE}

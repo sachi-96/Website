@@ -13,3 +13,4 @@ navbar:
       href: blog.html 
 output: distill::distill_article
 theme: postcards.css
+site: distill::distill_website
