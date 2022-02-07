@@ -13,4 +13,4 @@ output:
 site: distill::distill_website
 ---
  
-Hi! My name is Sachi. 
+Hi! My name is Sachi. I am first year student of the BREN MESM Program.  
