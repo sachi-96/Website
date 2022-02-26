@@ -1,7 +1,6 @@
 name: "."
-title: "mfeo"
+title: "Sachi Shiroma"
 description: |
-  mfeo
 output_dir: "docs"
 navbar:
   right:
@@ -9,8 +8,8 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
-    - text: "Sachi'Blog "              
+    - text: "My Blog"              
       href: blog.html 
 output: distill::distill_article
 theme: postcards.css
-site: distill::distill_website
+site: distill::distill_website 
