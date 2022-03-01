@@ -13,9 +13,8 @@ description: |
 
 Here are some examples of my previous work with R studio.  
 
-</p>
-<a  target="_blank" href="///Users/sachishiroma/Documents/ESM%20206%20Assignments%20/assignment4_task2_sachi_shiroma/sachi_shiroma_snowshoe_report.html">Snowshoe Hare Data</a>
-</div>
+
+<a  target="_blank" href="sachi_shiroma_snowshoe_report.html">Snowshoe Hare Data</a>
 
 
 
