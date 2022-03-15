@@ -1,21 +1,19 @@
 ---
-title: "Projects"
-author:
-  - name: Sachi Shiroma
-date: 2022-01-24
+title: "Past Experience"
 output:
-  distill::distill_article:
-    self_contained: false
-description: |
+  distill::distill_article
 ---
 
-<a href = "Sachi_Resume.pdf" target = '_blank'>My Resume</a>
+Researcher – City of San Jose, Downtown San Jose, CA (05/2019)
+Recorded quantitative and qualitative data regarding pedestrians littering habits
+Presented and organized data using SPSS for 3 project leaders
+Helped create solutions on how to reduce trash in the streets of San Jose
 
-Here are some examples of my previous work with R studio.  
+Lead Prototype Designer– Braven, San Jose, CA (05/2019)
+Collaborated with 8 other students to present and create a social movement prototype (#ishareyoushare) for Sutter Health
 
 
-<a  target="_blank" href="sachi_shiroma_snowshoe_report.html">Snowshoe Hare Data</a>
-
+<a href = "Sachi_Resume.pdf" target = '_blank'>CV</a>
 
 
 

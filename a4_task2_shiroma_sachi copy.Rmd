@@ -1,0 +1,196 @@
+---
+title: "Willamette Falls Fish Exploration (2001-2010)"
+author: "Sachi Shiroma"
+date: "3/8/2022"
+output:
+  rmdformats::material:
+        code_folding: hide
+---
+# Overview 
+The findings of the report examine adult fish passage of coho, jack coho and steelhead salmon recorded at the Willamette Falls fish ladder on the Willamette River (Oregon) from January 2001 to December 2010. The data is analyzed using a time series, a seasonplot, and annual counts by species. Data was collected by and made available to the public via the Columbia River DART(Data Access in Real Time) project.
+
+**Citation**
+"DART Adult Passage Graphics & Text." Columbia Basin Research, http://www.cbr.washington.edu/dart/query/adult_graph_text. 
+
+
+![Salmon and Steelhead Fish (Idaho Conservation League, 2022)](Screen-Shot-2020-07-22-at-2.41.16-PM.png)
+
+![Willamette Falls Ladder Map (U.S. Army Corps of Engineers)](WFL_vicinity1c.jpg)
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(here)
+library(tidyverse)
+library(janitor)
+library(broom)
+library(tsibble)
+library(feasts)
+library(fable)
+library(slider)
+library(patchwork)
+library(lubridate)
+library(prettydoc)
+
+```
+
+```{r}
+# read in and wrangle 
+fish <- read.csv(here("willamette_fish_passage.csv")) %>% 
+  clean_names() %>% 
+  replace(is.na(.), 0) %>%
+  select("date", "coho", "jack_coho", "steelhead") %>% 
+  mutate(date = lubridate::mdy(date)) %>% 
+  group_by(date, coho, jack_coho, steelhead) %>% 
+  summarize(total_count = sum(coho, jack_coho, steelhead))
+
+```
+
+
+```{r}
+# creating tsibble
+fish_ts <- fish %>% 
+  as_tsibble(key = NULL, index = date)
+```
+
+
+```{r}
+# convert time series to tsibble and use pivot_longer to reformat
+fish_ts_longer <- fish %>% 
+  as_tsibble(key = NULL, index = date) %>% 
+  pivot_longer("coho":"steelhead",
+               names_to = "species",
+               values_to = "value") %>% 
+  mutate(species = 
+         ifelse(species == "coho", "Coho",
+         ifelse(species == "jack_coho", "Jack Coho", 
+         ifelse(species == "steelhead", "Steelhead", 
+                "" )))) %>% 
+  select(-total_count) %>% 
+  rename(total_count = value)
+```
+
+
+```{r}
+# wrangling for annual counts
+fish_longer <- fish %>% 
+  pivot_longer("coho":"steelhead",
+               names_to = "species",
+               values_to = "value")
+```
+
+```{r, results = 'hide'}
+# tsibble exploration
+# ggplot(data = fish_longer, aes(x = date, y = value)) +
+  # geom_line() +
+  # labs(y = "Total Fish Counts")
+```
+
+# Visualizations
+
+## Graphs {.tabset}
+
+### Time Series
+```{r}
+# explore data with initial graph
+# ggplot(data = fish_ts_longer, aes(x=date, y=total_count)) +
+#   geom_line() +
+#   facet_wrap(~species)
+```
+
+```{r}
+# get species alone and use patchwork
+# coho
+coho_tab1 <- fish_ts_longer %>% 
+  filter(species == "Coho")
+
+coho_graph <- ggplot(data=coho_tab1, aes(x=date, y=total_count)) +
+  geom_line() +
+  theme_minimal() +
+  labs(title = "Coho", y="total count")
+
+```
+
+
+```{r}
+# jack_coho
+jackcoho_tab1 <- fish_ts_longer %>% 
+  filter(species == "Jack Coho")
+
+jackcoho_graph <- ggplot(data=jackcoho_tab1, aes(x=date, y=total_count)) +
+  geom_line() +
+  theme_minimal() +
+  labs(title = "Jack Coho", y = "total count")
+```
+
+
+```{r}
+# steelhead
+steelhead_tab1 <- fish_ts_longer %>% 
+  filter(species == "Steelhead")
+
+steelhead_graph <- ggplot(data=steelhead_tab1, aes(x=date, y=total_count)) +
+  geom_line() +
+  theme_minimal() +
+  labs(title = "Steelhead", y = "total count")
+```
+
+```{r}
+# patchwork
+tab1_comb <- coho_graph / jackcoho_graph / steelhead_graph
+tab1_comb
+```
+
+**F.1** This figure shows seasonplots of counts for each species (coho, jack coho, steelhead) captured from 2001-2010.
+
+This data shows that Steelhead are more frequently passing through than Coho and Jack salmon throughout the entire time frame.  In 2011, there is significant increase in Coho salmon than the previous years and in 2009 there is a significant increase in Jack Coho salmon. There is seasonality for the counts of Steelhead fish however no overall trend.  
+
+### Season Plots
+
+
+```{r}
+# explore counts per species with season plots
+# fish_ts %>%
+# gg_season(y = total_count)
+```
+
+
+```{r}
+# season plot
+fish_ts_longer %>% 
+  gg_season(y = total_count) +
+  theme_minimal() +
+  labs(x = "Date", y = "Total Count", 
+       title = "Total Counts for Coho, Jack Coho, and Steelhead Fish (2001-2010)",
+       subtitle = "2001-2010")
+```
+**F.2** This figure shows season plots for Coho, Jack and Steelhead fish counts from 2001-2010 at Willamette Falls, Oregon.  
+
+There are more Steelhead fish passing through consistently over throughout the year than Coho and Jack Salmon.  There is a large increase in the number of Coho and Jack salmon during the fall.  There were the highest number of Jack coho passing though in 2008 and for Coho salmon it was 2010.  For Steelhead, the number of counts was slightly higher in 2005.  
+
+
+### Annual Counts by Species
+
+```{r}
+fish_annual <- fish_longer %>% 
+  mutate(year = as.Date(as.character(date),format = "%Y")) %>%
+  group_by(year, species) %>% 
+  summarize(fish_yearly_total = sum(value))
+```
+
+
+```{r}
+fish_annual %>% 
+  ggplot(aes(x = year, y = fish_yearly_total)) +
+  geom_line(aes(color=species)) +
+  theme_minimal() +
+  scale_x_date(date_labels = "%Y") +
+  labs(
+    title = "Annual counts for fish passage by species (2000-2010)",
+    x = "Year",
+    y = "Count of fish passage"
+  )
+```
+
+**F.3** This figure shows fish passages by different fish species between 2000 and 2010.
+
+The counts for Coho salmon remain stable until 2008 where there is a sudden increase.  The Jack coho counts remain stable throughout the entire time frame.  Steelhead fish counts show the most changes throughout 2001-2010 , with the largest increases occurring during the first five years.

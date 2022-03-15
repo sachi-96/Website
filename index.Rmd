@@ -14,3 +14,5 @@ site: distill::distill_website
 ---
  
 Hi! My name is Sachi. I am first year student of the BREN MESM Program. I received my bachelor's degree in Sociology with a concentration in Race and Ethnic Studies at San Jose State University (where I am originally from).  I am a Japanese/American and full-time college student, hoping to pursue a career in environmental policy!
+
+
