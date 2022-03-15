@@ -1,0 +1,93 @@
+---
+title: "Sea Urchins"
+description: |
+  This data wrangles and visualizes Purple and Red sea urchin data, observed at 5 sites along the Santa Barbara coast.
+output: distill::distill_article
+---
+
+**Citation**
+Data: Reed, D. 2020. SBC LTER: Reef: Long-term experiment: Kelp removal: Urchin size frequency distribution ver 20. Environmental Data Initiative. https://doi.org/10.6073/pasta/5a1e9ef03aa47bd2225c0bb98a02a63b. 
+
+# Setup
+```{r setup, include=TRUE, warning = FALSE, message = TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+library(here)
+library(tidyverse)
+library(janitor)
+library(kableExtra)
+library(lubridate)
+```
+
+# Read in the Data
+```{r}
+urchins <- read_csv(here("data", "urchins.csv"))
+```
+
+# Clean the Names 
+```{r}
+urchins_clean <- urchins %>% 
+clean_names()
+```
+
+
+# Histogram of Urchin Sizes, Separated by Red and Purple Urchins
+```{r}
+ggplot(data = urchins_clean, aes(x = size, fill = common_name)) + #assingning graph values
+  geom_histogram(bins = 10) + #reducing bin size to 10
+  scale_fill_manual(values = c("purple", "red"), name = "Urchin Type") + #assigning names for the key
+  labs(x = "Size", y = "Urchins", title = "Sea Urchins by Color and Size" )+ #creating titles
+facet_wrap(~ common_name) #splitting the graph into two by different urchins
+
+```
+
+F.1 This data shows the different sizes of two different types of sea urchins (red and purple).
+
+# Finding the Mean, Median, Mode and Sample Size 
+```{r}
+urchin_stats <- urchins_clean %>% 
+group_by(common_name) %>% # finding the mean, median, standard deviation of urchin sizes 
+summarize(
+  "Sea Urchin Mean" = mean(size),
+  "Median" = median(size),
+  "SD of Urchins" = sd(size),
+   "Sample Size"= n()) %>% 
+rename("Sea Urchins" = common_name)
+```
+
+The data does show an approximately normal distribution because there is a large and ample sample size, (even though the purple urchin distribution is slightly right-skewed). As can be seen by the smaller standard deviation and difference in mean and median, the purple urchin data has a more concentrated count with less spread. It is observed that red urchin on average are larger than purple by 2.3 cm or a percent difference of 41%.
+
+# Changing Date Format and Adding Full Site Names
+```{r}
+purple_urchins <- urchins_clean %>% 
+  group_by(common_name = "Purple Urchin") %>%  # Separating Purple Urchin data 
+  mutate(dates_new = mdy(date)) %>% # Creating and reformatting the dates column
+  mutate(years = year(dates_new)) %>% # creating a separate column for years
+  mutate(site_full = case_when(
+    site == "NAPL" ~ "Naples Reef",
+    site == "AQUE" ~ "Arroyo Quemado Reef",
+    site == "CARP" ~ "Carpinteria Reef",
+    site == "MOHK" ~ "Mohawk Reef",
+    site == "IVEE" ~ "Isla Vista Reef")) # Adding a column with full site names 
+
+```
+
+# A Table of Purple Urchin Counts 
+```{r}
+purple_urchins_site_year <- purple_urchins %>% 
+  group_by(site_full, years) %>% # Creating a new subset by full site name and years
+  summarize(count = n()) # Finding the count for purple urchins 
+  
+```
+
+# Line Graphs of Purple Sea Urchin Counts by year, According to Each Site 
+```{r}
+ggplot(data = purple_urchins_site_year, aes(x = years, y = count, color = site_full)) + #assigning graph values
+  geom_line() + 
+  labs(x = "year", y = "site", title = "Numer of Sea Urchins by Year and Site") + 
+  theme(axis.text.x = element_text(angle = 65, hjust = 1)) +
+  scale_x_continuous(breaks = c(2008, 2010, 2012, 2014, 2016, 2018, 2020))+
+  facet_wrap(~ site_full, scales = 'free')
+```
+
+This graph reflects the changes in the purple sea urchin population by each site.  It does not represent the overall change of the entire population.  You would have to take into account the entire sea urchin population (including the red sea urchin population).  Exponential growth could explain the changes in number of purple urchins observed.
+

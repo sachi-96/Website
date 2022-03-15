@@ -16,6 +16,8 @@ navbar:
           href: data_viz.html
         - text: 'Willamette Falls'
           href: Proj_2.html
+        - text: 'Sea Urchins'
+          href: Proj_4.html
 output: distill::distill_article
 theme: postcards.css
 
