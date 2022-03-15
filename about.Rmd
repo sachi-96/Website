@@ -1,16 +1,12 @@
 ---
 title: "About Sachi"
 description: |
-  Interests: 
     In my spare time I enjoy going surfing, snowboarding, watching movies, going to the jiu jitsu gym, and hiking with my dogs!  I love animals especially dogs and cats, however I love learning about different wildlife species whether they are native or not.  I enjoy discussing topics about social injustices, racism and gender inequalities, and environmental justice!  
-  
-  Experience/Projects:
-    Senior year of my quantitative and qualitative Sociology course, we were selected to help the City of San Jose by collecting and analyzing data regarding littering habits in downtown San Jose.  I also used to volunteer regularly in various local environmental clubs such as Keep Coyote Creek Beautiful (KCCB) by participating in weekly trash clean ups.
 ---
 
+![Jake and Kuma at Uvas Canyon in Morgan Hill, CA.](IMG_5754.jpg)
 
-
-![**Kuma and Jake**](IMG_2284.jpg)
+![Halloween 2019](IMG_2284.jpg)
   
     
       
