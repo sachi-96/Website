@@ -11,9 +11,8 @@
 
 <meta name="author" content="Sachi Shiroma" />
 
-<meta name="date" content="2021-10-29" />
 
-<title>Santa Barbara Sea Urchin Data</title>
+<title>Farmer’s Perception of Climate Risk &amp; Fertilizer Application</title>
 
 <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content=""/>
@@ -961,6 +960,8 @@ d-appendix d-footnote-list a.footnote-backlink {
 <script src="/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/rmarkdown/rmd/h/navigation-1.1/tabsets.js"></script>
 <link href="/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/rmarkdown/rmd/h/highlightjs/default.css" rel="stylesheet" />
 <script src="/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/rmarkdown/rmd/h/highlightjs/highlight.js"></script>
+<script src="/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/kableExtra/kePrint-0.0.1/kePrint.js"></script>
+<link href="/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/kableExtra/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -1161,7 +1162,7 @@ $(document).ready(function () {
 <header class="header header--fixed" role="banner">
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
-<a href="index.html" class="title">Sachi Shiroma</a>
+<a href="index.html" class="title">Sachi's page</a>
 <input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
 </div>
 <div class="nav-right">
@@ -1175,8 +1176,10 @@ Projects
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
-<a href="data_viz.html">Snowshoe Hares</a>
-<a href="Proj_2.html">Willamette Falls</a>
+<a href="Proj1.html">Snowshoe Hares</a>
+<a href="Proj2.html">Willamette Falls</a>
+<a href="Proj3.html">Mono Lake</a>
+<a href="Proj4.html">Farmers</a>
 </div>
 </div>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -1219,10 +1222,16 @@ Projects
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="data_viz.html">Snowshoe Hares</a>
+      <a href="Proj1.html">Snowshoe Hares</a>
     </li>
     <li>
-      <a href="Proj_2.html">Willamette Falls</a>
+      <a href="Proj2.html">Willamette Falls</a>
+    </li>
+    <li>
+      <a href="Proj3.html">Mono Lake</a>
+    </li>
+    <li>
+      <a href="Proj4.html">Farmers</a>
     </li>
   </ul>
 </li>
@@ -1235,124 +1244,59 @@ Projects
 
 
 
-<h1 class="title toc-ignore">Santa Barbara Sea Urchin Data</h1>
+<h1 class="title toc-ignore">Farmer’s Perception of Climate Risk &amp; Fertilizer Application</h1>
 <h4 class="author">Sachi Shiroma</h4>
-<h4 class="date">10/29/2021</h4>
+<h4 class="date">12/2/2021</h4>
 
 </div>
 
 
-<div id="overview" class="section level1">
-<h1>Overview</h1>
-<p>This data wrangles and visualizes Purple and Red sea urchin data, observed at 5 sites along the Santa Barbara coast.</p>
-<p><strong>Citation</strong> Data: Reed, D. 2020. SBC LTER: Reef: Long-term experiment: Kelp removal: Urchin size frequency distribution ver 20. Environmental Data Initiative. <a href="https://doi.org/10.6073/pasta/5a1e9ef03aa47bd2225c0bb98a02a63b" class="uri">https://doi.org/10.6073/pasta/5a1e9ef03aa47bd2225c0bb98a02a63b</a>.</p>
-</div>
-<div id="setup" class="section level1">
-<h1>Setup</h1>
-<pre class="r"><code>knitr::opts_chunk$set(echo = TRUE)
-library(here)</code></pre>
-<pre><code>## here() starts at /Users/sachishiroma/Documents/ESM_244_Assignments/Website</code></pre>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
-<pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-## ✓ tibble  3.1.6     ✓ dplyr   1.0.8
-## ✓ tidyr   1.2.0     ✓ stringr 1.4.0
-## ✓ readr   2.1.2     ✓ forcats 0.5.1</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(janitor)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;janitor&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     chisq.test, fisher.test</code></pre>
-<pre class="r"><code>library(kableExtra)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;kableExtra&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     group_rows</code></pre>
-<pre class="r"><code>library(lubridate)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;lubridate&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     date, intersect, setdiff, union</code></pre>
-</div>
-<div id="read-in-the-data" class="section level1">
-<h1>Read in the Data</h1>
-<pre class="r"><code>urchins &lt;- read_csv(here(&quot;data&quot;, &quot;urchins.csv&quot;))</code></pre>
-<pre><code>## Rows: 59213 Columns: 6
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr (5): DATE, SITE, TREATMENT, SCIENTIFIC_NAME, COMMON_NAME
-## dbl (1): SIZE
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div id="clean-the-names" class="section level1">
-<h1>Clean the Names</h1>
-<pre class="r"><code>urchins_clean &lt;- urchins %&gt;% 
-clean_names()</code></pre>
-</div>
-<div id="histogram-of-urchin-sizes-separated-by-red-and-purple-urchins" class="section level1">
-<h1>Histogram of Urchin Sizes, Separated by Red and Purple Urchins</h1>
-<pre class="r"><code>ggplot(data = urchins_clean, aes(x = size, fill = common_name)) + #assingning graph values
-  geom_histogram(bins = 10) + #reducing bin size to 10
-  scale_fill_manual(values = c(&quot;purple&quot;, &quot;red&quot;), name = &quot;Urchin Type&quot;) + #assigning names for the key
-  labs(x = &quot;Size&quot;, y = &quot;Urchins&quot;, title = &quot;Sea Urchins by Color and Size&quot; )+ #creating titles
-facet_wrap(~ common_name) #splitting the graph into two by different urchins</code></pre>
-<p><img src="a3-task3-sachi_shiroma_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>F.1 This data shows the different sizes of two different types of sea urchins (red and purple).</p>
-</div>
-<div id="finding-the-mean-median-mode-and-sample-size" class="section level1">
-<h1>Finding the Mean, Median, Mode and Sample Size</h1>
-<pre class="r"><code>urchin_stats &lt;- urchins_clean %&gt;% 
-group_by(common_name) %&gt;% # finding the mean, median, standard deviation of urchin sizes 
-summarize(
-  &quot;Sea Urchin Mean&quot; = mean(size),
-  &quot;Median&quot; = median(size),
-  &quot;SD of Urchins&quot; = sd(size),
-   &quot;Sample Size&quot;= n()) %&gt;% 
-rename(&quot;Sea Urchins&quot; = common_name)</code></pre>
-<p>The data does show an approximately normal distribution because there is a large and ample sample size, (even though the purple urchin distribution is slightly right-skewed). As can be seen by the smaller standard deviation and difference in mean and median, the purple urchin data has a more concentrated count with less spread. It is observed that red urchin on average are larger than purple by 2.3 cm or a percent difference of 41%.</p>
-</div>
-<div id="changing-date-format-and-adding-full-site-names" class="section level1">
-<h1>Changing Date Format and Adding Full Site Names</h1>
-<pre class="r"><code>purple_urchins &lt;- urchins_clean %&gt;% 
-  group_by(common_name = &quot;Purple Urchin&quot;) %&gt;%  # Separating Purple Urchin data 
-  mutate(dates_new = mdy(date)) %&gt;% # Creating and reformatting the dates column
-  mutate(years = year(dates_new)) %&gt;% # creating a separate column for years
-  mutate(site_full = case_when(
-    site == &quot;NAPL&quot; ~ &quot;Naples Reef&quot;,
-    site == &quot;AQUE&quot; ~ &quot;Arroyo Quemado Reef&quot;,
-    site == &quot;CARP&quot; ~ &quot;Carpinteria Reef&quot;,
-    site == &quot;MOHK&quot; ~ &quot;Mohawk Reef&quot;,
-    site == &quot;IVEE&quot; ~ &quot;Isla Vista Reef&quot;)) # Adding a column with full site names </code></pre>
-</div>
-<div id="a-table-of-purple-urchin-counts" class="section level1">
-<h1>A Table of Purple Urchin Counts</h1>
-<pre class="r"><code>purple_urchins_site_year &lt;- purple_urchins %&gt;% 
-  group_by(site_full, years) %&gt;% # Creating a new subset by full site name and years
-  summarize(count = n()) # Finding the count for purple urchins </code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;site_full&#39;. You can override using the
-## `.groups` argument.</code></pre>
-</div>
-<div id="line-graphs-of-purple-sea-urchin-counts-by-year-according-to-each-site" class="section level1">
-<h1>Line Graphs of Purple Sea Urchin Counts by year, According to Each Site</h1>
-<pre class="r"><code>ggplot(data = purple_urchins_site_year, aes(x = years, y = count, color = site_full)) + #assigning graph values
-  geom_line() + 
-  labs(x = &quot;year&quot;, y = &quot;site&quot;, title = &quot;Numer of Sea Urchins by Year and Site&quot;) + 
-  theme(axis.text.x = element_text(angle = 65, hjust = 1)) +
-  scale_x_continuous(breaks = c(2008, 2010, 2012, 2014, 2016, 2018, 2020))+
-  facet_wrap(~ site_full, scales = &#39;free&#39;)</code></pre>
-<p><img src="a3-task3-sachi_shiroma_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>This graph reflects the changes in the purple sea urchin population by each site. It does not represent the overall change of the entire population. You would have to take into account the entire sea urchin population (including the red sea urchin population). Exponential growth could explain the changes in number of purple urchins observed.</p>
-</div>
-<div id="end-task" class="section level1">
-<h1>End Task</h1>
+<table class="table table-bordered" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<b> Table 1: Response Questions and CO2 emissions Awareness <b></b></b>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Question
+</th>
+<th style="text-align:left;">
+Yes
+</th>
+<th style="text-align:left;">
+No
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Do you think farmers can play an important role in reducing greenhouse gas emissions?
+</td>
+<td style="text-align:left;">
+43.43% (109)
+</td>
+<td style="text-align:left;">
+56.57% (142)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Were you aware that N2O is considered a greenhouse gas?
+</td>
+<td style="text-align:left;">
+66.67% (160)
+</td>
+<td style="text-align:left;">
+33.33% (80)
+</td>
+</tr>
+</tbody>
+</table>
+<div id="summary" class="section level1">
+<h1>Summary</h1>
+<p>There is a significant association between farmers knowledge of NO2 as a greenhouse gas and their response to whether or not they feel they can decrease greenhouse emissions. This means that these two variables are not independent of each other. The chi -square value, (<span class="math inline">\(\chi\)</span><sup>2</sup>(1) = 25.82) is high, indicating that there is a large difference between actual and expected values of the responses to both questions. This represents a significant association between the two variables. The p-value, which is significantly less than 0.001, indicates that there is sufficient evidence to reject the null hypothesis of independence. This means the alternative hypothesis that farmers awareness of NO2 being a greenhouse gas and whether or not they can lower emissions are dependent of each other, must be accepted. The table values and calculations ultimately show that there is a strong association indicating farmers who are aware that NO2 is a greenhouse gas are more likely to feel that they can help reduce emissions compared to farmers who were not aware that NO2 is a greenhouse gas. The more farmers who know that NO2 is a greenhouse gas (66.67%), the higher percentage of them will feel they can reduce greenhouse emissions (43.43%) versus farmers who did not know (33.33%).</p>
+<p><strong>Citation</strong> Stuart, D. 2021. Farmer surveys at the Kellogg Biological Station, Hickory Corners, MI (2011) ver 4. Environmental Data Initiative. <a href="https://doi.org/10.6073/pasta/55eda6881dcf45977626c58e3f24b82e" class="uri">https://doi.org/10.6073/pasta/55eda6881dcf45977626c58e3f24b82e</a></p>
 </div>
 
 <!--radix_placeholder_site_after_body-->

@@ -1,10 +1,10 @@
 ---
 title: "Snowshoe Hares"
 description: |
-output:
+  Differences in juvenile snowshoe hare weights for males and females.
+output: 
   distill::distill_article:
     code_folding: hide
-  
 ---
 
   This report provides an exploratory overview of differences in juvenile snowshoe hare weights for males and females at three different observation sites.  The sites which are located in Bonanza Creek provide snowshoe hare data from 1998-2012, and the data is an important step in gaining more qualitative data on the prey species (Kielland et al., 2017.)  The report also provides data comparing juvenile snowshoe hare hindfoot sizes and weight in grams.

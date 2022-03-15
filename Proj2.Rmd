@@ -1,7 +1,7 @@
 ---
 title: "Willamette Falls"
-description: | 
-  The findings of the report examine adult fish passage of coho, jack coho and steelhead salmon recorded at the Willamette Falls fish ladder on the Willamette River (Oregon) from January 2001 to December 2010. The data is analyzed using a time series, a seasonplot, and annual counts by species. Data was collected by and made available to the public via the Columbia River DART(Data Access in Real Time) project. 
+description: |
+  Adult fish passage of coho, jack coho and steelhead salmon recorded at the Willamette Falls fish ladder.
 output: 
   distill::distill_article:
     code_folding: hide

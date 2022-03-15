@@ -1,6 +1,7 @@
 ---
 title: "Mono Lake"
 description: |
+  Analysis of Mono Lake levels by year.
 output: 
   distill::distill_article:
     code_folding: hide

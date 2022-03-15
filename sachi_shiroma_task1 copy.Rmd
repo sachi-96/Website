@@ -1,0 +1,88 @@
+---
+title: "Farmer's Perception of Climate Risk & Fertilizer Application"
+author: "Sachi Shiroma"
+date: "12/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# Setup Chunk 
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, messsage = FALSE, include = FALSE)
+library(here)
+library(janitor)
+library(tidyverse)
+library(kableExtra)
+```
+
+```{r}
+# Read in the data
+farmer <- read_csv(here("data", "farmer_survey.csv"))
+```
+
+```{r}
+# Makea subset with just 'N2O' and 'farmers role' questions
+farmer_simplified <- farmer %>% 
+  select(question_code, response) %>% 
+filter(question_code %in% c("n2o_greenhouse","cc_farmers")) %>% 
+# drop the missing NA values
+drop_na()
+```
+
+```{r}
+# Clean up the questions by capitalizing them 
+farmer_simplified_tidy <- farmer_simplified %>% 
+ mutate(Question = case_when(
+    question_code == "n2o_greenhouse" ~ "Do you think farmers can play an important role in reducing greenhouse gas emissions?"
+,
+question_code == "cc_farmers" ~ "Were you aware that N2O is considered a greenhouse gas?")) %>%
+  drop_na() %>% 
+# Change environmental responses to Yes or No
+  mutate(response = case_when(
+    response == "yes" ~ "Yes",
+    response == "no" ~ "No")) %>% 
+  mutate(response = factor(response, levels = c("Yes", "No")))
+```
+
+
+
+```{r}
+# Make a table with questions and responses 
+farmer_table <- farmer_simplified_tidy %>% 
+  tabyl(Question, response)
+farmer_table
+```
+
+
+```{r, include = TRUE, message = FALSE, warning = FALSE, echo=FALSE}
+# Generate a subset for the table of Question and Response 
+farmer_contingency <- farmer_simplified_tidy %>% 
+  janitor::tabyl(Question, response)
+# Get percentages of proportions 
+farmer_proportions <- farmer_contingency %>% 
+  janitor::adorn_percentages() %>% 
+  janitor::adorn_pct_formatting(digits = 2) %>% 
+  janitor::adorn_ns()
+# Create a contingency table 
+farmer_prop <- farmer_contingency %>% 
+  column_to_rownames(var = "Question")
+# Table of subset and figure caption 
+kable(head(farmer_proportions),
+caption = "<b> Table 1: Response Questions and CO2 emissions Awareness <b>") %>% 
+# Add borders in table
+  kable_styling(bootstrap_options = "bordered",
+                full_width = F)
+```
+
+```{r}
+# Chi-square calculation
+farmer_prop_chi <- chisq.test(farmer_prop)
+# Clean up the table outcome 
+farmer_prop_chi_tidy <- broom::tidy(farmer_prop_chi)
+```
+
+# Summary 
+There is a significant association between farmers knowledge of NO2 as a greenhouse gas and their response to whether or not they feel they can decrease greenhouse emissions.  This means that these two variables are not independent of each other.  The chi -square value, ($\chi$^2^(`r farmer_prop_chi_tidy$parameter`) = `r round(farmer_prop_chi_tidy$statistic,2)`) is high, indicating that there is a large difference between actual and expected values of the responses to both questions.  This represents a significant association between the two variables.  The p-value, which is significantly less than 0.001, indicates that there is sufficient evidence to reject the null hypothesis of independence.  This means the alternative hypothesis that farmers awareness of NO2 being a greenhouse gas and whether or not they can lower emissions are dependent of each other, must be accepted. The table values and calculations ultimately show that there is a strong association indicating farmers who are aware that NO2 is a greenhouse gas are more likely to feel that they can help reduce emissions compared to farmers who were not aware that NO2 is a greenhouse gas.  The more farmers who know that NO2 is a greenhouse gas (66.67%), the higher percentage of them will feel they can reduce greenhouse emissions (43.43%) versus farmers who did not know (33.33%).  
+
+
+**Citation**
+Stuart, D. 2021. Farmer surveys at the Kellogg Biological Station, Hickory Corners, MI (2011) ver 4. Environmental Data Initiative. https://doi.org/10.6073/pasta/55eda6881dcf45977626c58e3f24b82e 

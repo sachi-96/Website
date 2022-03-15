@@ -1,6 +1,7 @@
 name: "."
-title: "Sachi Shiroma"
+title: "Sachi's page"
 description: |
+  Website
 output_dir: "docs"
 navbar:
   right:
@@ -8,16 +9,17 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
-    - text: "CV"              
-      href: blog.html 
+    - text: "CV"
+      href: blog.html
     - text: "Projects"
       menu:
-        - text: 'Snowshoe Hares'
-          href: data_viz.html
-        - text: 'Willamette Falls'
-          href: Proj_2.html
-        - text: 'Sea Urchins'
-          href: Proj_4.html
+      - text: 'Snowshoe Hares'
+        href: Proj1.html
+      - text: 'Willamette Falls'
+        href: Proj2.html  
+      - text: 'Mono Lake'
+        href: Proj3.html   
+      - text: 'Farmer Survey'
+        href: Proj4.html         
 output: distill::distill_article
 theme: postcards.css
-

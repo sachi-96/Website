@@ -1,9 +1,17 @@
 ---
-title: "Past Experience"
-output:
-  distill::distill_article
+title: "Curriculum Vitae"  
 ---
 
+
+# Education
+Masters in Environmental Science & Management, (Expected 06/2023)
+Pollution Prevention and Remediation
+Bren School of Environmental Science & Management – University of California, Santa Barbara (UCSB)
+
+Bachelor of Arts in Sociology – Race and Ethnic Studies,  (12/2020) 
+San Jose State University (SJSU)
+
+# Experience
 Researcher – City of San Jose, Downtown San Jose, CA (05/2019)
 Recorded quantitative and qualitative data regarding pedestrians littering habits
 Presented and organized data using SPSS for 3 project leaders
@@ -13,7 +21,7 @@ Lead Prototype Designer– Braven, San Jose, CA (05/2019)
 Collaborated with 8 other students to present and create a social movement prototype (#ishareyoushare) for Sutter Health
 
 
-<a href = "Sachi_Resume.pdf" target = '_blank'>CV</a>
+<a href = "Sachi_Resume.pdf" target = '_blank'>Click here for CV</a>
 
 
 

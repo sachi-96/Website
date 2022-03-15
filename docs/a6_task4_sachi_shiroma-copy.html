@@ -11,9 +11,9 @@
 
 <meta name="author" content="Sachi Shiroma" />
 
-<meta name="date" content="2021-10-29" />
+<meta name="date" content="2021-11-30" />
 
-<title>a3_task3_sachi_shiroma</title>
+<title>Historic Events of Mono Lake and Key Elevation Levels</title>
 
 <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content=""/>
@@ -1161,7 +1161,7 @@ $(document).ready(function () {
 <header class="header header--fixed" role="banner">
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
-<a href="index.html" class="title">Sachi Shiroma</a>
+<a href="index.html" class="title">Sachi's page</a>
 <input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
 </div>
 <div class="nav-right">
@@ -1175,8 +1175,10 @@ Projects
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
-<a href="data_viz.html">Snowshoe Hares</a>
-<a href="Proj_2.html">Willamette Falls</a>
+<a href="Proj1.html">Snowshoe Hares</a>
+<a href="Proj2.html">Willamette Falls</a>
+<a href="Proj3.html">Mono Lake</a>
+<a href="Proj4.html">Farmers</a>
 </div>
 </div>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -1219,10 +1221,16 @@ Projects
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="data_viz.html">Snowshoe Hares</a>
+      <a href="Proj1.html">Snowshoe Hares</a>
     </li>
     <li>
-      <a href="Proj_2.html">Willamette Falls</a>
+      <a href="Proj2.html">Willamette Falls</a>
+    </li>
+    <li>
+      <a href="Proj3.html">Mono Lake</a>
+    </li>
+    <li>
+      <a href="Proj4.html">Farmers</a>
     </li>
   </ul>
 </li>
@@ -1235,70 +1243,15 @@ Projects
 
 
 
-<h1 class="title toc-ignore">a3_task3_sachi_shiroma</h1>
+<h1 class="title toc-ignore">Historic Events of Mono Lake and Key Elevation Levels</h1>
 <h4 class="author">Sachi Shiroma</h4>
-<h4 class="date">10/29/2021</h4>
+<h4 class="date">11/30/2021</h4>
 
 </div>
 
 
-<div id="read-in-the-data" class="section level1">
-<h1>Read in the Data</h1>
-<pre class="r"><code>urchins &lt;- read_csv(here(&quot;data&quot;, &quot;urchins.csv&quot;))</code></pre>
-<pre><code>## Rows: 59213 Columns: 6
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr (5): DATE, SITE, TREATMENT, SCIENTIFIC_NAME, COMMON_NAME
-## dbl (1): SIZE
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div id="clean-the-names" class="section level1">
-<h1>Clean the Names</h1>
-<pre class="r"><code>urchins_clean &lt;- urchins %&gt;% 
-clean_names()</code></pre>
-</div>
-<div id="data-visualization" class="section level1">
-<h1>Data Visualization</h1>
-<pre class="r"><code>ggplot(data = urchins_clean, aes(x = size, fill = common_name)) + #assingning graph values
-  geom_histogram(bins = 10) + #reducing bin size to 10
-  scale_fill_manual(values = c(&quot;purple&quot;, &quot;red&quot;), name = &quot;Urchin Type&quot;) + #assigning names for the key
-  labs(x = &quot;Size&quot;, y = &quot;Urchins&quot;, title = &quot;Sea Urchins by Color and Size&quot; )+ #creating titles
-facet_wrap(~ common_name) #splitting the graph into two by different urchins</code></pre>
-<p><img src="a3-task3-task3-ss_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>F.1 This data shows the different sizes of two different types of sea urchins (red and purple).</p>
-<pre class="r"><code>urchin_stats &lt;- urchins_clean %&gt;% 
-group_by(common_name) %&gt;% 
-summarize(
-  &quot;Sea Urchin Mean&quot; = mean(size),
-  &quot;Median&quot; = median(size),
-  &quot;SD of Urchins&quot; = sd(size),
-   &quot;Sample Size&quot;= n()) %&gt;% 
-rename(&quot;Sea Urchins&quot; = common_name)</code></pre>
-<pre class="r"><code>purple_urchins &lt;- urchins_clean %&gt;% 
-  group_by(common_name = &quot;Purple Urchin&quot;) %&gt;% 
-  mutate(dates_new = mdy(date)) %&gt;% 
-  mutate(years = year(dates_new)) %&gt;% 
-  mutate(site_full = case_when(
-    site == &quot;NAPL&quot; ~ &quot;Naples Reef&quot;,
-    site == &quot;AQUE&quot; ~ &quot;Arroyo Quemado Reef&quot;,
-    site == &quot;CARP&quot; ~ &quot;Carpinteria Reef&quot;,
-    site == &quot;MOHK&quot; ~ &quot;Mohawk Reef&quot;,
-    site == &quot;IVEE&quot; ~ &quot;Isla Vista Reef&quot;))</code></pre>
-<pre class="r"><code>purple_urchins_site_year &lt;- purple_urchins %&gt;% 
-  group_by(site_full, years) %&gt;% 
-  summarize(count = n()) </code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;site_full&#39;. You can override using the
-## `.groups` argument.</code></pre>
-<pre class="r"><code>ggplot(data = purple_urchins_site_year, aes(x = years, y = count, color = site_full)) + #assingning graph values
-  geom_line() + 
-  labs(x = &quot;site&quot;, y = &quot;year&quot;, title = &quot;Numer of Sea Urchins by Year and Site&quot;) + 
-  theme(axis.text.x = element_text(angle = 65, hjust = 1)) +
-  scale_x_continuous(breaks = c(2008, 2010, 2012, 2014, 2016, 2018, 2020))+
-  facet_wrap(~ site_full, scales = &#39;free&#39;)</code></pre>
-<p><img src="a3-task3-task3-ss_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-</div>
+<p><img src="a6_task4_sachi_shiroma-copy_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>F.1 This graph shows the Mono lake levels above sea level (ft) by year. The key historic events are included as well as the changes in the ecosystem due to changing lake levels. The purple dashed line represents the decrease in brine shrimp, which is the main food supply for various species of birds that rely on them (Eared Grebes and California gulls). The brown line represents the emergence of land bridges that allows predators such as coyotes, to access major bird nesting sites. The green line which represents the lake level stability, shows that the lake levels have become unstable in the recent years since 1975.</p>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
