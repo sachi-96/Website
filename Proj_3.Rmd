@@ -1,0 +1,76 @@
+---
+title: "Mono Lake"
+description: |
+output: 
+  distill::distill_article:
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+# Setup Chunk
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(here)
+library(tidyverse)
+library(janitor)
+library(paletteer)
+library(sf)
+library(gghighlight)
+
+```
+
+```{r}
+# Read in the Data and Skip the first 4 rows of the data set 
+mono_lake_data <- read_csv(here("data", "mono_lake_annual_levels.csv"), skip = 5) %>% 
+clean_names()
+```
+
+
+```{r}
+# Create a beautiful graph
+ggplot(data = mono_lake_data, aes(x = year, y = lake_level_feet_above_sea_level)) + 
+geom_line(color = "aquamarine", size = 1.3)+
+theme_classic() +
+  
+# Set the range for years and lake levels 
+scale_x_continuous(breaks = seq(from = 1850, to = 2017, by = 20))+
+scale_y_continuous(breaks = seq(from = 6200, to = 6500, by = 10)) + 
+
+# Add lake level events 
+geom_hline(yintercept = 6377, color = "brown", linetype = "twodash")+
+annotate("text", x = 1888, y = 6379, label = "Land bridges for wildlife emerge (6,377 ft)", color = "brown")+
+geom_hline(yintercept = 6392, color = "darkgreen", linetype = "twodash")+
+annotate("text", x = 1865, y = 6394, label = "Stable level (6,392 ft)", color = "darkgreen")+
+geom_hline(yintercept = 6350, color = "purple", linetype = "twodash")+
+annotate("text", x = 1876, y = 6352, label = "Salinity above 150 g/L (6,350 ft)", color = "purple")+
+  
+# Customize color and size of title and labels 
+theme(plot.title = element_text(color = "#0099f9", size = 16, face = "bold", hjust = 0.5), 
+  axis.title.x = element_text(color = "#0099f9", size = 14, face = "italic"),
+  axis.title.y = element_text(color = "#0099f9", size = 14, face = "italic"))+
+  
+# Assigning names for key 
+  labs(x = "Year", y = "Lake Level (ft)", title = "Lake Levels Above Sea Level by Year")+
+  
+# State Water Board Annotation
+annotate("segment", x = 1999, xend = 2004, y = 6384, yend = 6426) +
+annotate(geom = "text", x = 1996, y = 6428, label = "State Water Board Decision (1994)",
+           size = 3, hjust = "center-align", color = "blue")+
+
+# Mono Lake Reserve Annotation 
+annotate("segment", x = 1981, xend = 1930, y = 6373, yend = 6387) +
+annotate(geom = "text", x = 1920, y = 6389, label = "Mono Lake Reserve Created (1981)",
+           size = 3, hjust = "center", color = "blue") +
+
+# Restoration Orders Annotation 
+annotate("segment", x = 1998, xend = 1986, y = 6383.3, yend = 6416) +
+annotate(geom = "text", x = 1974, y = 6419, label = "Restoration Orders Issued (1998)",
+           size = 3, hjust = "center", color = "blue")+
+
+# First Study of Mono Lake Annotation 
+annotate("segment", x = 1976, xend = 1925, y = 6378.3, yend = 6409) +
+annotate(geom = "text", x = 1920, y = 6411, label = "First Study of Mono Lake (1976)",
+           size = 3, hjust = "center", color = "blue")
+```
+
+F.1 This graph shows the Mono lake levels above sea level (ft) by year.  The key historic events are included as well as the changes in the ecosystem due to changing lake levels. The purple dashed line represents the decrease in brine shrimp, which is the main food supply for various species of birds that rely on them (Eared Grebes and California gulls). The brown line represents the emergence of land bridges that allows predators such as coyotes, to access major bird nesting sites. The green line which represents the lake level stability, shows that the lake levels have become unstable in the recent years since 1975.
