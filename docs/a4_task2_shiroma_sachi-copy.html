@@ -1125,8 +1125,7 @@
       <div class="row">
         <div class="col-xs-3">
 	  	  <div id="header">
-	    <h1 class="title">Willamette Falls Fish Exploration
-(2001-2010)</h1>
+	    <h1 class="title">Willamette Falls Fish Exploration (2001-2010)</h1>
 	    	    	    	    <h4 class="author">Sachi Shiroma</h4>
 	    	    	    	    <h4 class="date">3/8/2022</h4>
 	    	  </div>
@@ -1240,25 +1239,15 @@ Projects
 <div class="col-xs-10">
 <div id="overview" class="section level1">
 <h1>Overview</h1>
-<p>The findings of the report examine adult fish passage of coho, jack
-coho and steelhead salmon recorded at the Willamette Falls fish ladder
-on the Willamette River (Oregon) from January 2001 to December 2010. The
-data is analyzed using a time series, a seasonplot, and annual counts by
-species. Data was collected by and made available to the public via the
-Columbia River DART(Data Access in Real Time) project.</p>
-<p><strong>Citation</strong> “DART Adult Passage Graphics &amp; Text.”
-Columbia Basin Research, <a
-href="http://www.cbr.washington.edu/dart/query/adult_graph_text"
-class="uri">http://www.cbr.washington.edu/dart/query/adult_graph_text</a>.</p>
+<p>The findings of the report examine adult fish passage of coho, jack coho and steelhead salmon recorded at the Willamette Falls fish ladder on the Willamette River (Oregon) from January 2001 to December 2010. The data is analyzed using a time series, a seasonplot, and annual counts by species. Data was collected by and made available to the public via the Columbia River DART(Data Access in Real Time) project.</p>
+<p><strong>Citation</strong> “DART Adult Passage Graphics &amp; Text.” Columbia Basin Research, <a href="http://www.cbr.washington.edu/dart/query/adult_graph_text" class="uri">http://www.cbr.washington.edu/dart/query/adult_graph_text</a>.</p>
 <div class="figure">
 <img src="Screen-Shot-2020-07-22-at-2.41.16-PM.png" alt="" />
-<p class="caption">Salmon and Steelhead Fish (Idaho Conservation League,
-2022)</p>
+<p class="caption">Salmon and Steelhead Fish (Idaho Conservation League, 2022)</p>
 </div>
 <div class="figure">
 <img src="WFL_vicinity1c.jpg" alt="" />
-<p class="caption">Willamette Falls Ladder Map (U.S. Army Corps of
-Engineers)</p>
+<p class="caption">Willamette Falls Ladder Map (U.S. Army Corps of Engineers)</p>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in and wrangle </span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fish <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">&quot;willamette_fish_passage.csv&quot;</span>)) <span class="sc">%&gt;%</span> </span>
@@ -1333,14 +1322,8 @@ Engineers)</p>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>tab1_comb <span class="ot">&lt;-</span> coho_graph <span class="sc">/</span> jackcoho_graph <span class="sc">/</span> steelhead_graph</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>tab1_comb</span></code></pre></div>
 <p><img src="a4_task2_shiroma_sachi-copy_files/figure-html/unnamed-chunk-10-1.png" width="576" /></p>
-<p><strong>F.1</strong> This figure shows seasonplots of counts for each
-species (coho, jack coho, steelhead) captured from 2001-2010.</p>
-<p>This data shows that Steelhead are more frequently passing through
-than Coho and Jack salmon throughout the entire time frame. In 2011,
-there is significant increase in Coho salmon than the previous years and
-in 2009 there is a significant increase in Jack Coho salmon. There is
-seasonality for the counts of Steelhead fish however no overall
-trend.</p>
+<p><strong>F.1</strong> This figure shows seasonplots of counts for each species (coho, jack coho, steelhead) captured from 2001-2010.</p>
+<p>This data shows that Steelhead are more frequently passing through than Coho and Jack salmon throughout the entire time frame. In 2011, there is significant increase in Coho salmon than the previous years and in 2009 there is a significant increase in Jack Coho salmon. There is seasonality for the counts of Steelhead fish however no overall trend.</p>
 </div>
 <div id="season-plots" class="section level3">
 <h3>Season Plots</h3>
@@ -1354,15 +1337,8 @@ trend.</p>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Date&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Total Count&quot;</span>, </span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Total Counts for Coho, Jack Coho, and Steelhead Fish (2001-2010)&quot;</span>,</span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;2001-2010&quot;</span>)</span></code></pre></div>
-<p><img src="a4_task2_shiroma_sachi-copy_files/figure-html/unnamed-chunk-12-1.png" width="576" />
-<strong>F.2</strong> This figure shows season plots for Coho, Jack and
-Steelhead fish counts from 2001-2010 at Willamette Falls, Oregon.</p>
-<p>There are more Steelhead fish passing through consistently over
-throughout the year than Coho and Jack Salmon. There is a large increase
-in the number of Coho and Jack salmon during the fall. There were the
-highest number of Jack coho passing though in 2008 and for Coho salmon
-it was 2010. For Steelhead, the number of counts was slightly higher in
-2005.</p>
+<p><img src="a4_task2_shiroma_sachi-copy_files/figure-html/unnamed-chunk-12-1.png" width="576" /> <strong>F.2</strong> This figure shows season plots for Coho, Jack and Steelhead fish counts from 2001-2010 at Willamette Falls, Oregon.</p>
+<p>There are more Steelhead fish passing through consistently over throughout the year than Coho and Jack Salmon. There is a large increase in the number of Coho and Jack salmon during the fall. There were the highest number of Jack coho passing though in 2008 and for Coho salmon it was 2010. For Steelhead, the number of counts was slightly higher in 2005.</p>
 </div>
 <div id="annual-counts-by-species" class="section level3">
 <h3>Annual Counts by Species</h3>
@@ -1381,13 +1357,8 @@ it was 2010. For Steelhead, the number of counts was slightly higher in
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Count of fish passage&quot;</span></span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="a4_task2_shiroma_sachi-copy_files/figure-html/unnamed-chunk-14-1.png" width="576" /></p>
-<p><strong>F.3</strong> This figure shows fish passages by different
-fish species between 2000 and 2010.</p>
-<p>The counts for Coho salmon remain stable until 2008 where there is a
-sudden increase. The Jack coho counts remain stable throughout the
-entire time frame. Steelhead fish counts show the most changes
-throughout 2001-2010 , with the largest increases occurring during the
-first five years.</p>
+<p><strong>F.3</strong> This figure shows fish passages by different fish species between 2000 and 2010.</p>
+<p>The counts for Coho salmon remain stable until 2008 where there is a sudden increase. The Jack coho counts remain stable throughout the entire time frame. Steelhead fish counts show the most changes throughout 2001-2010 , with the largest increases occurring during the first five years.</p>
 </div>
 </div>
 </div>
