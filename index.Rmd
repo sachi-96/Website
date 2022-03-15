@@ -1,6 +1,6 @@
 ---
 title: "Welcome!"
-image: "IMG_4648.JPG"
+image: "Headshot.jpeg"
 links:
   - label: LinkedIn
     url: "https://www.linkedin.com/in/s-shiroma/"
