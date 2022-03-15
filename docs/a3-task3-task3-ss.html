@@ -1267,8 +1267,7 @@ clean_names()</code></pre>
   labs(x = &quot;Size&quot;, y = &quot;Urchins&quot;, title = &quot;Sea Urchins by Color and Size&quot; )+ #creating titles
 facet_wrap(~ common_name) #splitting the graph into two by different urchins</code></pre>
 <p><img src="a3-task3-task3-ss_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>F.1 This data shows the different sizes of two different types of sea
-urchins (red and purple).</p>
+<p>F.1 This data shows the different sizes of two different types of sea urchins (red and purple).</p>
 <pre class="r"><code>urchin_stats &lt;- urchins_clean %&gt;% 
 group_by(common_name) %&gt;% 
 summarize(

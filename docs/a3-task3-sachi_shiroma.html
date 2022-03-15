@@ -1244,13 +1244,8 @@ Projects
 
 <div id="overview" class="section level1">
 <h1>Overview</h1>
-<p>This data wrangles and visualizes Purple and Red sea urchin data,
-observed at 5 sites along the Santa Barbara coast.</p>
-<p><strong>Citation</strong> Data: Reed, D. 2020. SBC LTER: Reef:
-Long-term experiment: Kelp removal: Urchin size frequency distribution
-ver 20. Environmental Data Initiative. <a
-href="https://doi.org/10.6073/pasta/5a1e9ef03aa47bd2225c0bb98a02a63b"
-class="uri">https://doi.org/10.6073/pasta/5a1e9ef03aa47bd2225c0bb98a02a63b</a>.</p>
+<p>This data wrangles and visualizes Purple and Red sea urchin data, observed at 5 sites along the Santa Barbara coast.</p>
+<p><strong>Citation</strong> Data: Reed, D. 2020. SBC LTER: Reef: Long-term experiment: Kelp removal: Urchin size frequency distribution ver 20. Environmental Data Initiative. <a href="https://doi.org/10.6073/pasta/5a1e9ef03aa47bd2225c0bb98a02a63b" class="uri">https://doi.org/10.6073/pasta/5a1e9ef03aa47bd2225c0bb98a02a63b</a>.</p>
 </div>
 <div id="setup" class="section level1">
 <h1>Setup</h1>
@@ -1302,8 +1297,7 @@ library(here)</code></pre>
 <pre class="r"><code>urchins_clean &lt;- urchins %&gt;% 
 clean_names()</code></pre>
 </div>
-<div id="histogram-of-urchin-sizes-separated-by-red-and-purple-urchins"
-class="section level1">
+<div id="histogram-of-urchin-sizes-separated-by-red-and-purple-urchins" class="section level1">
 <h1>Histogram of Urchin Sizes, Separated by Red and Purple Urchins</h1>
 <pre class="r"><code>ggplot(data = urchins_clean, aes(x = size, fill = common_name)) + #assingning graph values
   geom_histogram(bins = 10) + #reducing bin size to 10
@@ -1311,11 +1305,9 @@ class="section level1">
   labs(x = &quot;Size&quot;, y = &quot;Urchins&quot;, title = &quot;Sea Urchins by Color and Size&quot; )+ #creating titles
 facet_wrap(~ common_name) #splitting the graph into two by different urchins</code></pre>
 <p><img src="a3-task3-sachi_shiroma_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>F.1 This data shows the different sizes of two different types of sea
-urchins (red and purple).</p>
+<p>F.1 This data shows the different sizes of two different types of sea urchins (red and purple).</p>
 </div>
-<div id="finding-the-mean-median-mode-and-sample-size"
-class="section level1">
+<div id="finding-the-mean-median-mode-and-sample-size" class="section level1">
 <h1>Finding the Mean, Median, Mode and Sample Size</h1>
 <pre class="r"><code>urchin_stats &lt;- urchins_clean %&gt;% 
 group_by(common_name) %&gt;% # finding the mean, median, standard deviation of urchin sizes 
@@ -1325,16 +1317,9 @@ summarize(
   &quot;SD of Urchins&quot; = sd(size),
    &quot;Sample Size&quot;= n()) %&gt;% 
 rename(&quot;Sea Urchins&quot; = common_name)</code></pre>
-<p>The data does show an approximately normal distribution because there
-is a large and ample sample size, (even though the purple urchin
-distribution is slightly right-skewed). As can be seen by the smaller
-standard deviation and difference in mean and median, the purple urchin
-data has a more concentrated count with less spread. It is observed that
-red urchin on average are larger than purple by 2.3 cm or a percent
-difference of 41%.</p>
+<p>The data does show an approximately normal distribution because there is a large and ample sample size, (even though the purple urchin distribution is slightly right-skewed). As can be seen by the smaller standard deviation and difference in mean and median, the purple urchin data has a more concentrated count with less spread. It is observed that red urchin on average are larger than purple by 2.3 cm or a percent difference of 41%.</p>
 </div>
-<div id="changing-date-format-and-adding-full-site-names"
-class="section level1">
+<div id="changing-date-format-and-adding-full-site-names" class="section level1">
 <h1>Changing Date Format and Adding Full Site Names</h1>
 <pre class="r"><code>purple_urchins &lt;- urchins_clean %&gt;% 
   group_by(common_name = &quot;Purple Urchin&quot;) %&gt;%  # Separating Purple Urchin data 
@@ -1355,11 +1340,8 @@ class="section level1">
 <pre><code>## `summarise()` has grouped output by &#39;site_full&#39;. You can override using the
 ## `.groups` argument.</code></pre>
 </div>
-<div
-id="line-graphs-of-purple-sea-urchin-counts-by-year-according-to-each-site"
-class="section level1">
-<h1>Line Graphs of Purple Sea Urchin Counts by year, According to Each
-Site</h1>
+<div id="line-graphs-of-purple-sea-urchin-counts-by-year-according-to-each-site" class="section level1">
+<h1>Line Graphs of Purple Sea Urchin Counts by year, According to Each Site</h1>
 <pre class="r"><code>ggplot(data = purple_urchins_site_year, aes(x = years, y = count, color = site_full)) + #assigning graph values
   geom_line() + 
   labs(x = &quot;year&quot;, y = &quot;site&quot;, title = &quot;Numer of Sea Urchins by Year and Site&quot;) + 
@@ -1367,11 +1349,7 @@ Site</h1>
   scale_x_continuous(breaks = c(2008, 2010, 2012, 2014, 2016, 2018, 2020))+
   facet_wrap(~ site_full, scales = &#39;free&#39;)</code></pre>
 <p><img src="a3-task3-sachi_shiroma_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>This graph reflects the changes in the purple sea urchin population
-by each site. It does not represent the overall change of the entire
-population. You would have to take into account the entire sea urchin
-population (including the red sea urchin population). Exponential growth
-could explain the changes in number of purple urchins observed.</p>
+<p>This graph reflects the changes in the purple sea urchin population by each site. It does not represent the overall change of the entire population. You would have to take into account the entire sea urchin population (including the red sea urchin population). Exponential growth could explain the changes in number of purple urchins observed.</p>
 </div>
 <div id="end-task" class="section level1">
 <h1>End Task</h1>
