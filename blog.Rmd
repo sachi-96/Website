@@ -1,5 +1,5 @@
 ---
-title: "Curriculum Vitae"  
+title: "Experience"  
 ---
 
 
@@ -11,7 +11,7 @@ Bren School of Environmental Science & Management – University of California, 
 Bachelor of Arts in Sociology – Race and Ethnic Studies,  (12/2020) 
 San Jose State University (SJSU)
 
-# Experience
+# Research
 Researcher – City of San Jose, Downtown San Jose, CA (05/2019)
 Recorded quantitative and qualitative data regarding pedestrians littering habits
 Presented and organized data using SPSS for 3 project leaders
